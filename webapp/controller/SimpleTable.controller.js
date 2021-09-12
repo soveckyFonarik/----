@@ -6,10 +6,9 @@ sap.ui.define([
     'sap/ui/model/Filter',
     'sap/ui/model/FilterOperator',
     '../utils/formatter',
-    "sap/ui/core/Fragment",
     'sap/ui/export/Spreadsheet',
     'sap/ui/export/library',
-], function (Controller, TablePersoController, mlibrary, DemoPersoService, Filter, FilterOperator, formatter, Fragment, Spreadsheet, exportLibrary) {
+], function (Controller, TablePersoController, mlibrary, DemoPersoService, Filter, FilterOperator, formatter, Spreadsheet, exportLibrary) {
     "use strict";
     const ResetAllMode = mlibrary.ResetAllMode;
     var EdmType = exportLibrary.EdmType;
@@ -75,11 +74,6 @@ sap.ui.define([
                 self.reverseView();
             })
             DemoPersoService.resetPersData()
-
-
-
-
-            // this._oTPC.setShowSelectAll()
         },
 
         validateTable: function () {
@@ -133,7 +127,6 @@ sap.ui.define([
                 );
                 this.getView().addDependent(this._valueHelpDialog);
             }
-
             this._valueHelpDialog.open(sInputValue);
         },
 
@@ -229,8 +222,5 @@ sap.ui.define([
 
             return aCols;
         }
-
-
-
     });
 });

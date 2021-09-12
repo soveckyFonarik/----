@@ -92,9 +92,7 @@
                             </HBox>
                         </VBox>
                     </HBox>
-                    <!-- <HBox>
-                        <Button/>
-                    </HBox> -->
+                   
                 </f:content>
             </f:DynamicPageHeader>
         </f:header>
