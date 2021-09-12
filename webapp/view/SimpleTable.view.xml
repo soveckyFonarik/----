@@ -1,0 +1,243 @@
+<mvc:View controllerName="simple-app.controller.SimpleTable"
+    height="100%"
+    class="sapUiSizeCompact"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+    <f:DynamicPage id="SimpleTable"
+        toggleHeaderOnTitleClick="true"
+        showFooter="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>appTitle}"/>
+                </f:heading>
+                <f:expandedContent>
+                    <HBox>
+                        <Title text="{i18n>appDescription}"/>
+                    </HBox>
+                </f:expandedContent>
+                <f:snappedContent>
+                    <HBox>
+                        <Title text="{i18n>title}"/>
+                    </HBox>
+                </f:snappedContent>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <HBox justifyContent="SpaceBetween"
+                        visible="{= ${state>/typeRendering} === 'read'}">
+                        <VBox>
+                            <HBox alignItems="Center"
+                                justifyContent="Center">
+                                <VBox class="sapUiMediumMarginEnd">
+                                    <Label text="{i18n>typeTask}"
+                                        labelFor="typeTaskFilter"/>
+                                    <ComboBox width="100%"
+                                        id="typeTaskFilter"
+                                        app:type="typeTask"
+                                        items="{typeTaskModel>/}"
+                                        value="{filterModel>/typeTask}"
+                                        selectedKey="{filterModel>/typeTaskKey}">
+                                        <core:Item key="{typeTaskModel>key}"
+                                            text="{typeTaskModel>value}" />
+                                    </ComboBox>
+                                </VBox>
+                                <VBox class="sapUiMediumMarginEnd">
+                                    <Label text="{i18n>responsible}"
+                                        labelFor="responsibleFilter"/>
+                                    <Input app:type="responsible"
+                                        showValueHelp="true"
+                                        valueHelpRequest=".onValueHelpRequest"
+                                        id="responsibleFilter"
+                                        value="{filterModel>/responsible}"/>
+                                </VBox>
+                                <VBox class="sapUiMediumMarginEnd">
+                                    <Label text="{i18n>startDate}"
+                                        labelFor="startDateFilter"/>
+                                    <DatePicker app:type="startDate"
+                                        id="startDateFilter"
+                                        displayFormat="dd.MM.yyyy"
+                                        valueFormat="yyyy-MM-dd"
+                                        value="{filterModel>/startDate}" />
+                                </VBox>
+                                <VBox class="sapUiMediumMarginEnd">
+                                    <Label text="{i18n>expirationDate}"
+                                        labelFor="expirationDateFilter"/>
+                                    <DatePicker app:type="expirationDate"
+                                        id="expirationDateFilter"
+                                        displayFormat="dd.MM.yyyy"
+                                        valueFormat="yyyy-MM-dd"
+                                        value="{filterModel>/expirationDate}" />
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                        <VBox alignItems="Center"
+                            justifyContent="Center">
+                            <HBox>
+                                <Button class="sapUiSmallMarginEnd"
+                                    press="onResetFilter"
+                                    icon="sap-icon://clear-filter"/>
+                                <Button class="sapUiSmallMarginEnd"
+                                    press="onSubmitFilter"
+                                    icon="sap-icon://filter"/>
+                                <Button press="onResetFilterData"
+                                    icon="sap-icon://reset"/>
+                            </HBox>
+                        </VBox>
+                    </HBox>
+                    <!-- <HBox>
+                        <Button/>
+                    </HBox> -->
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <Table backgroundDesign="Transparent"
+                id="SimpleTableTask"
+                items="{tableSourceModel>/}">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text="{i18n>tableHeader}"
+                            level="H2"/>
+                        <ToolbarSpacer/>
+                        <Button icon="sap-icon://action-settings"
+                            press="onPersoButtonPressed"
+                            visible="{= ${state>/typeRendering} === 'read'}" />
+
+                        <Button icon="sap-icon://add"
+                            press="onAddButtonPressed"
+                            visible="{= ${state>/typeRendering} === 'edit'}"/>
+
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column id="nameTask">
+                        <Text text="{i18n>nameTask}" />
+                    </Column>
+                    <Column id="typeTask">
+                        <Text text="{i18n>typeTask}" />
+                    </Column>
+                    <Column id="responsible">
+                        <Text text="{i18n>responsible}" />
+                    </Column>
+                    <Column id="startDate">
+                        <Text text="{i18n>startDate}" />
+                    </Column>
+                    <Column id="expirationDate">
+                        <Text text="{i18n>expirationDate}" />
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <VBox>
+                                <Text text="{tableSourceModel>nameTask}"
+                                    visible="{= ${state>/typeRendering} === 'read'}"/>
+                                <Input visible="{= ${state>/typeRendering} === 'edit'}"
+                                    value="{tableSourceModel>nameTask}"
+                                    app:type="nameTask"/>
+                            </VBox>
+                            <VBox>
+                                <Text text="{tableSourceModel>typeTask}"
+                                    visible="{= ${state>/typeRendering} === 'read'}" />
+                                <ComboBox width="100%"
+                                    visible="{= ${state>/typeRendering} === 'edit'}"
+                                    app:type="typeTask"
+                                    items="{path:'typeTaskModel>/', templateShareable:false }"
+                                    value="{tableSourceModel>typeTask}"
+                                    selectedKey="{tableSourceModel>typeTaskKey}">
+                                    <core:Item key="{typeTaskModel>key}"
+                                        text="{typeTaskModel>value}" />
+                                </ComboBox>
+                            </VBox>
+                            <VBox>
+                                <Text text="{tableSourceModel>responsible}"
+                                    visible="{= ${state>/typeRendering} === 'read'}" />
+                                <Input visible="{= ${state>/typeRendering} === 'edit'}"
+                                    app:type="responsible"
+                                    selectedKey="{tableSourceModel>responsibleKey}"
+                                    value="{tableSourceModel>responsible}"
+                                    showSuggestion="true"
+                                    suggest="handleSuggest"
+                                    suggestionItems="{path:'responsibleListModel>/', templateShareable:false }">
+                                    <suggestionItems>
+                                        <core:Item key="{responsibleListModel>key}"
+                                            text="{responsibleListModel>name}" />
+                                    </suggestionItems>
+                                </Input>
+                            </VBox>
+                            <VBox>
+                                <Text text="{
+                                        path: 'tableSourceModel>startDate',
+                                        type: 'sap.ui.model.type.Date',
+                                        formatOptions: {
+                                            source: {
+                                                pattern: 'yyyy-MM-dd'
+                                            },
+                                        pattern: 'dd.MM.yyyy'
+                                        }
+                                    }"
+                                    visible="{= ${state>/typeRendering} === 'read'}" />
+                                <DatePicker visible="{= ${state>/typeRendering} === 'edit'}"
+                                    app:type="startDate"
+                                    displayFormat="dd.MM.yyyy"
+                                    valueFormat="yyyy-MM-dd"
+                                    value="{tableSourceModel>startDate}" />
+                            </VBox>
+                            <VBox>
+                                <Text text="{
+                                        path: 'tableSourceModel>expirationDate',
+                                        type: 'sap.ui.model.type.Date',
+                                        formatOptions: {
+                                            source: {
+                                                pattern: 'yyyy-MM-dd'
+                                            },
+                                        pattern: 'dd.MM.yyyy'
+                                        }
+                                    }"
+                                    visible="{= ${state>/typeRendering} === 'read'}" />
+                                <DatePicker visible="{= ${state>/typeRendering} === 'edit'}"
+                                    app:type="expirationDate"
+                                    displayFormat="dd.MM.yyyy"
+                                    valueFormat="yyyy-MM-dd"
+                                    value="{tableSourceModel>expirationDate}" />
+                            </VBox>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+
+
+        </f:content>
+        <f:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Button text="{i18n>save}"
+                    visible="{= ${state>/typeRendering} === 'edit'}"
+                    press="onSave"
+                    icon="sap-icon://save"
+                    type="Emphasized"/>
+                <Button text="{i18n>exportExcel}"
+                    visible="{= ${state>/typeRendering} === 'read'}"
+                    press="onDocumentExcelExport"
+                    icon="sap-icon://excel-attachment"
+                    type="Emphasized"/>
+                <Button text="{i18n>edit}"
+                    visible="{= ${state>/typeRendering} === 'read'}"
+                    press="onEditTable"
+                    icon="sap-icon://edit"
+                    type="Transparent"/>
+
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>

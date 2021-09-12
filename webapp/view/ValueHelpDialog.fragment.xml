@@ -1,0 +1,17 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Dialog title="{i18n>responsible}">
+        <content>
+            <List items="{responsibleListModel>/}"
+                selectionChange="onSelectionChange"
+                mode="SingleSelectMaster"
+                includeItemInSelection="true">
+                <StandardListItem title="{responsibleListModel>name}" />
+            </List>
+        </content>
+        <endButton >
+            <Button text="{i18n>cancel}"
+                press="onCloseDialog"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

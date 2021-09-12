@@ -1,0 +1,19 @@
+{
+  "name": "suek_test",
+  "version": "1.0.0",
+  "description": "тестовое задание компании \"суек\"",
+  "main": "index.js",
+  "scripts": {
+    "start": "grunt serve",
+    "build": "grunt build"
+  },
+  "author": "mikhail pogorelovky",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^1.0.4",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-connect": "^2.1.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-openui5": "^0.15.0"
+  }
+}
