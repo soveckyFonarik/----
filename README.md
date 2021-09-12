@@ -1,6 +1,11 @@
 # Тестовое задание на SAP UI5 в VS CODE
+## Содержание
+- [Само тестовое задание здесь](discription.md)
+- [установка зависимоестей](#Install)
+- [использование](#usage)
+- [лицензия](#license)
 ***
-## установка зависимостей проекта
+## Install
 
 ```bash
 npm install
@@ -9,16 +14,21 @@ npm install
 
 распакованный SDK должен находится в корне проекта в папке sapui5-sdk.
 
+## Структура проекта
+
 ```
 Gruntfile.js            discription.md          package-lock.json       sapui5-sdk
 README.md               node_modules            package.json            webapp
 ```
 
 ---
-## запуск проекта
+## Usage
 ```
-npm run serve
+npm run start
 ```
+и переходим по ссылке в браузере [http://localhost:8080](http://localhost:8080)
+
+
 ## License
 
 MIT © Mikhail Pogorelovsky
