@@ -17,7 +17,7 @@ npm install
 ## Структура проекта
 
 ```
-Gruntfile.js            discription.md          package-lock.json       sapui5-sdk
+discription.md          package-lock.json       sapui5-sdk
 README.md               node_modules            package.json            webapp
 ```
 
